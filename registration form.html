@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Registration Form</title>
+  <style>
+    .registration-form {
+      width: 500px;
+    }
+    
+    .registration-details {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 300px;
+    }
+    
+    h2 {
+      color: rgb(8, 0, 255);
+    }
+    
+    input[type="submit"] {
+      background-color: green;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    input[type="button"] {
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function displayData() {
+      // Get form values
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var website = document.getElementById("website").value;
+      var imageLink = document.getElementById("imageLink").value;
+      var gender = document.querySelector('input[name="gender"]:checked').value;
+      var skills = [];
+      var checkboxes = document.getElementsByName("skills");
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          skills.push(checkboxes[i].value);
+        }
+      }
+      
+      // Display data
+      var displayDiv = document.getElementById("display");
+      displayDiv.innerHTML = "<h2>Registration Details</h2>" +
+        "<p><strong>Name:</strong> " + name + "</p>" +
+        "<p><strong>Email:</strong> " + email + "</p>" +
+        "<p><strong>Website:</strong> " + website + "</p>" +
+        "<p><strong>Image Link:</strong> <img src='" + imageLink + "' alt='User Image' width='100'></p>" +
+        "<p><strong>Gender:</strong> " + gender + "</p>" +
+        "<p><strong>Skills:</strong> " + skills.join(", ") + "</p>";
+    }
+    
+    function clearForm() {
+      document.getElementById("registrationForm").reset();
+      document.getElementById("display").innerHTML = "";
+    }
+  </script>
+</head>
+<body>
+  <h2>Student Registration Form</h2>
+  
+  <div class="registration-form">
+    <form id="registrationForm" onsubmit="event.preventDefault(); displayData();">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br><br>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br><br>
+      
+      <label for="website">Website:</label>
+      <input type="text" id="website" name="website"><br><br>
+      
+      <label for="imageLink">Image Link:</label>
+      <input type="text" id="imageLink" name="imageLink"><br><br>
+      
+      <label for="gender">Gender:</label>
+      <input type="radio" id="male" name="gender" value="Male" required>
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" value="Female">
+      <label for="female">Female</label>
+      <input type="radio" id="other" name="gender" value="Other">
+      <label for="other">Other</label><br><br>
+      
+      <label for="skills">Skills:</label>
+      <input type="checkbox" id="html" name="skills" value="HTML">
+      <label for="html">HTML</label>
+      <input type="checkbox" id="css" name="skills" value="CSS">
+      <label for="css">CSS</label>
+      <input type="checkbox" id="javascript" name="skills" value="JavaScript">
+      <label for="javascript">JavaScript</label><br><br>
+      
+      <input type="submit" value="Enroll Student">
+      <input type="button" value="Clear" onclick="clearForm();">
+    </form>
+  </div>
+  
+  <div id="display" class="registration-details"></div>
+</body>
+</html>
